@@ -1,0 +1,19 @@
+- error = @application.errors.include?(:name)
+fieldset class='control-group#{error ? ' has-error' : ''}'
+  = f.label :name, :class => 'control-label'
+  div class='controls'
+    = f.text_field :name, :class => 'form-control input-large input-with-feedback', :autofocus => true
+    span class='help-inline' = error ? f.error_message_on(:name, :class => 'text-error') : pat(:example)
+- error = @application.errors.include?(:key)
+fieldset class='control-group#{error ? ' has-error' : ''}'
+  = f.label :key, :class => 'control-label'
+  div class='controls'
+    = f.text_field :key, :class => 'form-control input-large input-with-feedback'
+    span class='help-inline' = error ? f.error_message_on(:key, :class => 'text-error') : pat(:example)
+
+div class="form-actions"
+  = f.submit pat(:save), :class => 'btn btn-primary'
+  |&nbsp;
+  = f.submit pat(:save_and_continue), :class => 'btn btn-info', :name => 'save_and_continue'
+  |&nbsp;
+  = link_to pat(:cancel), url(:applications, :index), :class => 'btn btn-default'

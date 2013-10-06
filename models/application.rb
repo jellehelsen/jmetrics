@@ -5,6 +5,7 @@ class Application
   # field <name>, :type => <type>, :default => <value>
   field :name, :type => String
   field :key, :type => String
+  has_many :events
   before_create :generate_key
 
   # You can define indexes on documents using the index macro:

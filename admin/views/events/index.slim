@@ -1,0 +1,60 @@
+ul class="nav nav-tabs"
+  li class="active" = link_to tag_icon(:list, pat(:list)), url(:events, :index)
+  li = link_to tag_icon(:plus, pat(:new)), url(:events, :new)
+
+div class="tabs-content"
+  table class="table table-striped table-hover table-condensed" id="list"
+    thead
+      tr
+        th class='header list-menu'
+          div class='dropdown'
+            a href='#' class='list-menu-toggle.dropdown-toggle dropdown-toggle' data-toggle='dropdown'
+              = tag_icon :magic
+              span class='caret'
+            ul class='list-menu dropdown-menu' role='dropdown'
+              li class='list-menu-wrapper' = link_to tag_icon(:check, pat(:select_all)), '#', :id => 'select-all', :class => 'list-menu-link'
+              li class='list-menu-wrapper list-menu-wrapper-disabled' = link_to tag_icon('check-empty', pat(:deselect_all)), '#', :id => 'deselect-all', :class => 'list-menu-link list-menu-link-disabled'
+              li class='list-menu-divider divider'
+              li class='list-menu-wrapper list-menu-wrapper-disabled'
+                = link_to tag_icon(:trash, pat(:delete_selected)), '#', :id => 'delete-selected', :class => 'list-menu-link list-menu-link-disabled'
+                div class='list-menu-popover-delete-selected popover right'
+                  div class='arrow'
+                  h3 class='popover-title' = pat(:delete_selected_title)
+                  div class='popover-content'
+                    - form_tag url(:events, :destroy_many), :method => :delete do
+                      = hidden_field_tag :event_ids, :'data-delete-many-ids' => true
+                      = submit_tag  pat(:delete), :class =>'list-menu-popover-delete-selected-btn btn btn-danger btn-small'
+                      div class='btn btn-default btn-small cancel' = pat(:cancel)
+        th class='header' = mat(:event, :application)
+        th class='header' = mat(:event, :timestamp)
+        th class='header' = mat(:event, :name)
+        th class='header' = mat(:event, :msg)
+        th class='header' = mat(:event, :seq_nr)
+        th class='header' = mat(:event, :user)
+        th class='header' = mat(:event, :session)
+        th class='header' = mat(:event, :extra)
+        th class='header list-row-action-header'
+
+    tbody
+      -@events.each do |event|
+        tr class='list-row'
+          td class='list-column list-selectable' = check_box_tag 'event_ids[]', :value => event.id, :class => 'list-selectable-checkbox'
+          td class='list-column' = event.application.name rescue ""
+          td class='list-column' = event.timestamp
+          td class='list-column' = event.name
+          td class='list-column' = event.msg
+          td class='list-column' = event.seq_nr
+          td class='list-column' = event.user
+          td class='list-column' = event.session
+          td class='list-column' = event.extra
+          td class='list-column list-row-action'
+            div class='list-row-action-wrapper'
+              = link_to tag_icon(:edit), :href => url(:events, :edit, :id => event.id), :rel => :tooltip, :title => "#{pat(:edit)} event", :class => 'list-row-action-wrapper-link'
+              = link_to tag_icon(:trash), :rel => :tooltip, :title => "#{pat(:delete)} event", :class => 'list-row-action-delete-one list-row-action-wrapper-link'
+              div class='popover list-row-action-popover-delete-one left'
+                div class='arrow'
+                h3 class='popover-title' = pat(:delete, :model => "event")
+                div class='popover-content'
+                  - form_tag url(:events, :destroy, :id => event.id), :method => :delete do
+                    = submit_tag pat(:delete), :class =>'list-row-action-popover-delete-one-btn btn btn-danger btn-small'
+                    div class='btn btn-default btn-small cancel' = pat(:cancel)

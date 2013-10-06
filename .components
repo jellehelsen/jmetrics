@@ -1,0 +1,10 @@
+---
+:orm: mongoid
+:test: rspec
+:mock: none
+:script: none
+:renderer: slim
+:stylesheet: none
+:namespace: Jmetrics
+:migration_format: number
+:admin_renderer: slim

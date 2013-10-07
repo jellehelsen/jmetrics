@@ -10,7 +10,7 @@ password  = 'changeme'
 
 shell.say ""
 
-account = Account.create(:email => email, :name => "Foo", :surname => "Bar", :password => password, :password_confirmation => password, :role => "admin")
+account = Account.create(:email => email, :name => "Foo", :surname => "Bar", :password => password, :password_confirmation => password, :role => "admin") unless Account.where(email: email).exists?
 
 if account.valid?
   shell.say "================================================================="

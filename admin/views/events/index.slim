@@ -58,3 +58,4 @@ div class="tabs-content"
                   - form_tag url(:events, :destroy, :id => event.id), :method => :delete do
                     = submit_tag pat(:delete), :class =>'list-row-action-popover-delete-one-btn btn btn-danger btn-small'
                     div class='btn btn-default btn-small cancel' = pat(:cancel)
+  = will_paginate @events

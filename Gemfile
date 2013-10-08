@@ -14,6 +14,9 @@ source 'https://rubygems.org'
 gem 'rake'
 
 # Component requirements
+#gem 'will_paginate', '~>3.0'
+#gem 'kaminari', '~> 0.14.1', :require => 'kaminari/sinatra'
+gem "will_paginate_mongoid"
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'slim'
 gem 'mongoid', '~>3.0.0'

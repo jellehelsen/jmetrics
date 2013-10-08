@@ -1,7 +1,7 @@
 Jmetrics::Admin.controllers :events do
   get :index do
     @title = "Events"
-    @events = Event.order_by([:session, :seq_nr])
+    @events = Event.order_by([:session, :seq_nr]).paginate(:page => params[:page])
     render 'events/index'
   end
 

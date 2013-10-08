@@ -39,6 +39,14 @@ Bundler.require(:default, PADRINO_ENV)
 # Add your before (RE)load hooks here
 #
 Padrino.before_load do
+  require 'will_paginate'
+  require 'will_paginate'
+  require 'will_paginate/view_helpers/sinatra'
+  include WillPaginate::Sinatra::Helpers
+  require 'will_paginate'
+  #require 'will_paginate'
+  require 'will_paginate/view_helpers/sinatra'
+  include WillPaginate::Sinatra::Helpers
 end
 
 ##

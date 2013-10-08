@@ -10,15 +10,15 @@ Jmetrics::App.helpers do
   end  
 
   def application_id
-    request_headers['application_id']
+    request_headers['x_application_id']
   end
 
   def auth_checksum
-    env['HTTP_X_AUTHCHECKSUM']
+    request_headers['x_authchecksum']
   end
 
   def authenticate
-    halt 401, "No applicatiod id of checksum" if application_id.nil? or auth_checksum.nil?
+    halt 401, "No applicatiod id or checksum" if application_id.nil? or auth_checksum.nil?
     @body = request.body.read
     logger.debug @body.inspect
     @application = Application.find(application_id)
